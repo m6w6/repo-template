@@ -1,0 +1,18 @@
+<?php extract($_ENV) ?>
+{
+    "name": "m6w6/<?=$REPO?>",
+    "description": "",
+    "keywords": [],
+    "license": "BSD-2-Clause",
+    "authors": [
+        {
+            "name": "Michael Wallner",
+            "email": "mike@php.net",
+        }
+    ],
+    "autoload": {
+        "psr0": {
+            "<?=$REPO?>\\": "lib/"
+        }
+    }
+}

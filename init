@@ -1,0 +1,75 @@
+#!/bin/bash
+# - arguments will be exported to env
+# - must called from within the repo root
+
+export REPO=$(basename $(pwd) .git)
+
+while test $# -gt 0
+do
+	export "$1"
+	shift
+done
+
+for FILE in $(ls -a $(dirname -- $0)/presets)
+do
+	SRCFILE=$(dirname -- $0)/presets/$FILE
+	case $FILE in
+	.|..)
+		continue
+		;;
+	composer.json)
+		test "${COMPOSER+set}" = "" && continue
+		SRCFILE=$(mktemp -t $RANDOM)
+		php -d variables_order=E $(dirname -- $0)/presets/composer.json >$SRCFILE
+		;;
+	README.md)
+		SRCFILE=$(mktemp -t $RANDOM)
+		php -d variables_order=E $(dirname -- $0)/presets/README.md >$SRCFILE
+		;;
+	*)
+		;;
+	esac
+
+	if test -e $FILE
+	then
+		DIFF="diff -udbBE -- $SRCFILE $FILE"
+		# ignore changes with only additions or removals
+		if  ! $DIFF | awk '{if(NR<4){next}}/^-/{if(p){exit 1}m++}/^\+/{if(m){exit 1}p++}'
+		then
+			while read -n 1 -p "File $FILE exists and differs (q,s,r,d,v,?) " ACTION
+			do
+				echo
+				case $ACTION in
+				s)
+					break
+					;;
+				r)
+					cp -fv -- $SRCFILE $FILE
+					break
+					;;
+				d)
+					$DIFF
+					;;
+				v)
+					vimdiff -- $SRCFILE $FILE
+					;;
+				q)
+					exit
+					;;
+				*)
+					echo "Select what to do now:"
+					echo "  (q)uit and exit program now"
+					echo "  (s)kip this file an keep the existing"
+					echo "  (r)eplace the existing file with the preset"
+					echo "  (d)iff the two files -udbBE"
+					echo "  (v)imdiff the two files"
+					echo "  (?) this help"
+					echo
+					;;
+				esac
+			done
+		fi
+	else
+		cp -v $SRCFILE $FILE
+	fi
+done
