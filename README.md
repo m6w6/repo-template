@@ -1,6 +1,6 @@
 # repo-template
 
-Boilerplate for my new repos. Eating its own dog food.
+Boilerplate for my repos. Eating its own dog food.
 
 ## License
 
