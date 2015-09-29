@@ -4,6 +4,8 @@
 
 [![Build Status](https://travis-ci.org/m6w6/<?=$REPO?>.svg?branch=master)](https://travis-ci.org/m6w6/<?=$REPO?>)
 
+...
+
 ## Documentation
 
 <?php if (isset($PECL)) : ?>
