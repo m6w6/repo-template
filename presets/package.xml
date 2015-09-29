@@ -60,6 +60,7 @@
    <pearinstaller>
     <min>1.4.1</min>
    </pearinstaller>
+  </required>
  </dependencies>
  <providesextension><?=$PECL?></providesextension>
  <extsrcrelease>
