@@ -7,7 +7,7 @@
 ## Documentation
 
 <?php if (isset($PECL)) : ?>
-See the [online markdown reference](https://mdref.m6w6.name/<?=$PECL=?>).
+See the [online markdown reference](https://mdref.m6w6.name/<?=$PECL?>).
 
 Known issues are listed in [BUGS](./BUGS) and future ideas can be found in [TODO](./TODO).
 <?php endif; ?>
