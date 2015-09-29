@@ -19,16 +19,16 @@ do
 		;;
 	composer.json)
 		test "${COMPOSER+set}" = "" && continue
-		SRCFILE=$(mktemp -t $RANDOM)
+		SRCFILE=$(mktemp)
 		php -d variables_order=E $(dirname -- $0)/presets/composer.json >$SRCFILE
 		;;
 	package.xml|CREDITS)
 		test "${PECL+set}" = "" && continue
-		SRCFILE=$(mktemp -t $RANDOM)
-		php -d variables_order=E $(dirname -- $0)/presets/package.xml >$SRCFILE
+		SRCFILE=$(mktemp)
+		php -d variables_order=E $(dirname -- $0)/presets/$FILE >$SRCFILE
 		;;
 	README.md)
-		SRCFILE=$(mktemp -t $RANDOM)
+		SRCFILE=$(mktemp)
 		php -d variables_order=E $(dirname -- $0)/presets/README.md >$SRCFILE
 		;;
 	*)

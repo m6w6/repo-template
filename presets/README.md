@@ -4,7 +4,13 @@
 
 [![Build Status](https://travis-ci.org/m6w6/<?=$REPO?>.svg?branch=master)](https://travis-ci.org/m6w6/<?=$REPO?>)
 
-...
+## Documentation
+
+<?php if (isset($PECL)) : ?>
+See the [online markdown reference](https://mdref.m6w6.name/<?=$PECL=?>).
+
+Known issues are listed in [BUGS](./BUGS) and future ideas can be found in [TODO](./TODO).
+<?php endif; ?>
 
 ## Installing
 <?php if (isset($COMPOSER)) : ?>
