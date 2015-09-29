@@ -1,0 +1,72 @@
+<?php extract($_ENV) ?>
+<?xml version="1.0" encoding="UTF-8" ?>
+<package version="2.0" xmlns="http://pear.php.net/dtd/package-2.0"
+ xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="
+  http://pear.php.net/dtd/tasks-1.0
+  http://pear.php.net/dtd/tasks-1.0.xsd
+  http://pear.php.net/dtd/package-2.0
+  http://pear.php.net/dtd/package-2.0.xsd">
+ <name><?=$PECL?></name>
+ <channel>pecl.php.net</channel>
+ <summary></summary>
+ <description><![CDATA[
+
+]]></description>
+ <lead>
+  <name>Michael Wallner</name>
+  <user>mike</user>
+  <email>mike@php.net</email>
+  <active>yes</active>
+ </lead>
+ <date><?=date("Y-m-d")?></date>
+ <version>
+  <release>0.1.0dev</release>
+  <api>0.1.0</api>
+ </version>
+ <stability>
+  <release>alpha</release>
+  <api>alpha</api>
+ </stability>
+ <license uri="http://copyfree.org/content/standard/licenses/2bsd/license.txt">BSD-2-Clause</license>
+ <notes><![CDATA[
+]]></notes>
+ <contents>
+  <dir name="/">
+   <file role="doc" name="AUTHORS"/>
+   <file role="doc" name="BUGS"/>
+   <file role="doc" name="CONTRIBUTING.md"/>
+   <file role="doc" name="CREDITS"/>
+   <file role="doc" name="LICENSE"/>
+   <file role="doc" name="README.md"/>
+   <file role="doc" name="THANKS"/>
+   <file role="src" name="config.m4"/>
+   <file role="src" name="Makefile.frag"/>
+   <file role="src" name="php_<?=$PECL?>.h"/>
+   <dir name="src">
+    <file role="src" name="php_<?=$PECL?>_api.h"/>
+    <file role="src" name="php_<?=$PECL?>.c"/>
+   </dir>
+   <dir name="tests">
+   </dir>
+  </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>7.0.0-dev</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.1</min>
+   </pearinstaller>
+ </dependencies>
+ <providesextension><?=$PECL?></providesextension>
+ <extsrcrelease>
+  <!--configureoption
+   name="with-alib-dir"
+   prompt="where to find alib"
+   default="/usr" />
+  </extsrcrelease-->
+ <changelog />
+</package>

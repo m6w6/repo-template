@@ -22,6 +22,11 @@ do
 		SRCFILE=$(mktemp -t $RANDOM)
 		php -d variables_order=E $(dirname -- $0)/presets/composer.json >$SRCFILE
 		;;
+	package.xml|CREDITS)
+		test "${PECL+set}" = "" && continue
+		SRCFILE=$(mktemp -t $RANDOM)
+		php -d variables_order=E $(dirname -- $0)/presets/package.xml >$SRCFILE
+		;;
 	README.md)
 		SRCFILE=$(mktemp -t $RANDOM)
 		php -d variables_order=E $(dirname -- $0)/presets/README.md >$SRCFILE
