@@ -7,7 +7,7 @@
     "authors": [
         {
             "name": "Michael Wallner",
-            "email": "mike@php.net",
+            "email": "mike@php.net"
         }
     ],
     "autoload": {
