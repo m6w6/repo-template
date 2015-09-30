@@ -1,0 +1,16 @@
+<?php extract($_ENV) ?>
+ARG_ENABLE("<?=$PECL?>", "for <?=$PECL?> support", "no");
+
+if (PHP_<?=strtoupper($PECL)?> == "yes") {
+	var PHP_<?=strtoupper($PECL)?>_HEADERS=glob("src/*.h"), PHP_<?=strtoupper($PECL)?>_SOURCES=glob("src/*.c");
+
+	EXTENSION("<?=$PECL?>", PHP_<?=strtoupper($PECL)?>_SOURCES);
+	PHP_INSTALL_HEADERS("ext/<?=$PECL?>", "php_propro.h");
+	for (var i=0; i<PHP_<?=strtoupper($PECL)?>_HEADERS.length; ++i) {
+		var basename = FSO.GetFileName(PHP_<?=strtoupper($PECL)?>_HEADERS[i]);
+		copy_and_subst(PHP_<?=strtoupper($PECL)?>_HEADERS[i], basename, []);
+		PHP_INSTALL_HEADERS("ext/<?=$PECL?>", basename);
+	}
+
+	AC_DEFINE("HAVE_<?=strtoupper($PECL)?>", 1);
+}

@@ -15,6 +15,7 @@ do
 	SRCFILE=$(dirname -- $0)/presets/$FILE
 	case $FILE in
 	.|..)
+		echo $FILE
 		continue
 		;;
 	composer.json)
@@ -22,7 +23,7 @@ do
 		SRCFILE=$(mktemp)
 		php -d variables_order=E $(dirname -- $0)/presets/composer.json >$SRCFILE
 		;;
-	package.xml|CREDITS)
+	package.xml|CREDITS|config.*|Makefile.frag)
 		test "${PECL+set}" = "" && continue
 		SRCFILE=$(mktemp)
 		php -d variables_order=E $(dirname -- $0)/presets/$FILE >$SRCFILE
@@ -38,8 +39,7 @@ do
 	if test -e $FILE
 	then
 		DIFF="diff -udbBE -- $SRCFILE $FILE"
-		# ignore changes with only additions or removals
-		if  ! $DIFF | awk '{if(NR<4){next}}/^-/{if(p){exit 1}m++}/^\+/{if(m){exit 1}p++}'
+		if ! $DIFF >/dev/null
 		then
 			while read -n 1 -p "File $FILE exists and differs (q,s,r,d,v,?) " ACTION
 			do
