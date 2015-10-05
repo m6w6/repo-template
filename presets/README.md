@@ -1,20 +1,28 @@
 <?php extract($_ENV); ?>
 # <?=$REPO?>
 
+<?php if (isset($MDREF)) : ?>
+
+Sources for https://mdref.m6w6.name/<?=$MDREF?>
+
+<?php else : ?>
 
 [![Build Status](https://travis-ci.org/m6w6/<?=$REPO?>.svg?branch=master)](https://travis-ci.org/m6w6/<?=$REPO?>)
 
 ...
 
 ## Documentation
+<?php endif; ?>
 
 <?php if (isset($PECL)) : ?>
 See the [online markdown reference](https://mdref.m6w6.name/<?=$PECL?>).
 
 Known issues are listed in [BUGS](./BUGS) and future ideas can be found in [TODO](./TODO).
 <?php endif; ?>
+<?php if (!isset($MDREF)) : ?>
 
 ## Installing
+<?php endif; ?>
 <?php if (isset($COMPOSER)) : ?>
 
 ### Composer
@@ -84,7 +92,9 @@ Check out the latest [releases](./releases) or the bundled
 
 ## License
 
-<?=$REPO?> is licensed under the 2-Clause-BSD license, which can be found in
+<?=$REPO?> is licensed under the <?php if (isset($MDREF)) : ?>
+Open Works <?php else : ?>2-Clause-BSD <?php endif ?>
+license, which can be found in
 the accompanying [LICENSE](./LICENSE) file.
 
 ## Contributing

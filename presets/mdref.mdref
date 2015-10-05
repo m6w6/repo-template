@@ -1,0 +1,2 @@
+<?php extract($_ENV) ?>
+https://github.com/m6w6/<?=$REPO?>/edit/master/%s.md

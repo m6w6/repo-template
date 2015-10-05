@@ -4,6 +4,13 @@
 
 export REPO=$(basename $(pwd) .git)
 
+if test $(uname) = "Linux"
+then
+	MKTEMP=mktemp
+else
+	MKTEMP="mktemp -t repo-template"
+fi
+
 while test $# -gt 0
 do
 	export "$1"
@@ -15,22 +22,27 @@ do
 	SRCFILE=$(dirname -- $0)/presets/$FILE
 	case $FILE in
 	.|..)
-		echo $FILE
 		continue
 		;;
 	composer.json)
 		test "${COMPOSER+set}" = "" && continue
-		SRCFILE=$(mktemp)
+		SRCFILE=$($MKTEMP)
 		php -d variables_order=E $(dirname -- $0)/presets/composer.json >$SRCFILE
 		;;
 	package.xml|CREDITS|config.*|Makefile.frag)
 		test "${PECL+set}" = "" && continue
-		SRCFILE=$(mktemp)
+		SRCFILE=$($MKTEMP)
 		php -d variables_order=E $(dirname -- $0)/presets/$FILE >$SRCFILE
 		;;
-	README.md)
-		SRCFILE=$(mktemp)
-		php -d variables_order=E $(dirname -- $0)/presets/README.md >$SRCFILE
+	README.md|LICENSE)
+		SRCFILE=$($MKTEMP)
+		php -d variables_order=E $(dirname -- $0)/presets/$FILE >$SRCFILE
+		;;
+	mdref.mdref)
+		test "${MDREF+set}" = "" && continue
+		SRCFILE=$($MKTEMP)
+		php -d variables_order=E $(dirname -- $0)/presets/$FILE >$SRCFILE
+		FILE=$MDREF.mdref
 		;;
 	*)
 		;;
